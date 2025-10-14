@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: Outfit, "Franklin Gothic Medium", "Arial Narrow", Arial,
+    sans-serif;
+}
+.active hr {
+  @apply block;
+}
+
+::-webkit-scrollbar {
+  @apply hidden;
+}
+.dark {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .active p {
+    @apply text-white bg-primary;
+  }
+}
