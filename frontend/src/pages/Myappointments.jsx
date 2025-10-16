@@ -2,12 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/Context";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
 function Myappointments() {
-  const navigate = useNavigate()
-  const { token, getdoctorsData , backendUrl } = useContext(AppContext);
+  const { token, getdoctorsData, backendUrl } = useContext(AppContext);
   const [appointments, setAppointments] = useState([]);
+
   const months = [
     "",
     "Jan",
@@ -23,27 +22,29 @@ function Myappointments() {
     "Nov",
     "Dec",
   ];
+
+  // Format slot date
   const slotDateFormat = (slotDate) => {
     const dateArray = slotDate.split("_");
-    return (
-      dateArray[0] + " " + months[Number(dateArray[1])] + " " + dateArray[2]
-    );
+    return `${dateArray[0]} ${months[Number(dateArray[1])]} ${dateArray[2]}`;
   };
+
+  // Fetch user appointments
   const getUserAppointments = async () => {
     try {
-      const { data } = await axios.get(
-        `${backendUrl}/api/user/appointments`,
-        { headers: { token } }
-      );
+      const { data } = await axios.get(`${backendUrl}/api/user/appointments`, {
+        headers: { token },
+      });
 
       if (data.success) {
         setAppointments(data.appointments.reverse());
       }
     } catch (err) {
-
       toast.error(err.message);
     }
   };
+
+  // Cancel appointment
   const cancelAppointment = async (appointmentId) => {
     try {
       const { data } = await axios.post(
@@ -73,6 +74,7 @@ function Myappointments() {
       <p className="pb-3 mt-12 font-medium text-zinc-700 border-b">
         My appointments
       </p>
+
       <div>
         {appointments &&
           appointments.map((item, index) => (
@@ -80,13 +82,16 @@ function Myappointments() {
               className="grid grid-cols-[1fr_2fr] gap-4 sm:flex sm:gap-6 py-2 border-b"
               key={index}
             >
+              {/* Doctor Image */}
               <div>
                 <img
                   className="w-32 bg-indigo-50"
                   src={item.docData.image}
-                  alt=""
+                  alt={item.docData.name}
                 />
               </div>
+
+              {/* Appointment Info */}
               <div className="flex-1 text-sm text-zinc-600">
                 <p className="text-neutral-800 font-semibold">
                   {item.docData.name}
@@ -102,12 +107,9 @@ function Myappointments() {
                   {slotDateFormat(item.slotDate)} | {item.slotTime}
                 </p>
               </div>
+
+              {/* Actions */}
               <div className="flex flex-col gap-2 justify-end">
-                {!item.cancelled && (
-                  <button onClick={()=> navigate("paypal-payment/"+item.docData.fees)} className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300">
-                    Pay Online
-                  </button>
-                )}
                 {!item.cancelled && (
                   <button
                     onClick={() => cancelAppointment(item._id)}
