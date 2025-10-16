@@ -3,20 +3,29 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../context/Context.jsx";
 import { assets } from "../assets/assets";
 import RelatedDoctors from "../components/RelatedDoctors";
-import axios from "axios";
 import { toast } from "react-toastify";
 
 function Appointment() {
   const navigate = useNavigate();
   const { docId } = useParams();
 
-  const { doctors, currencySymbol, token, getdoctorsData, backendUrl, user } =
-    useContext(AppContext); // make sure AppContext provides user or userId
+  const {
+    doctors,
+    currencySymbol,
+    token,
+    backendUrl,
+    userData,
+    setSlotDate,
+    setSlotTime,
+    setUserId,
+    setAmount,
+  } = useContext(AppContext);
 
   const [docInfo, setDocInfo] = useState(null);
   const [docSlots, setDocSlots] = useState([]);
   const [slotIndex, setSlotIndex] = useState(0);
-  const [slotTime, setSlotTime] = useState("");
+  const [slotTime, setSlotTimeLocal] = useState("");
+
   const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
   // Get doctor info
@@ -26,9 +35,8 @@ function Appointment() {
   };
 
   // Generate available slots
-  const getAvailableSlots = async () => {
+  const getAvailableSlots = () => {
     if (!docInfo) return;
-
     setDocSlots([]);
     const today = new Date();
 
@@ -49,25 +57,19 @@ function Appointment() {
 
       const timeSlots = [];
       while (currentDate < endTime) {
-        const formattedTime = currentDate.toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        });
-
+        const formattedTime = currentDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
         const day = currentDate.getDate();
         const month = currentDate.getMonth() + 1;
         const year = currentDate.getFullYear();
         const slotDate = `${day}_${month}_${year}`;
+
         const isBooked =
           docInfo.slots_booked &&
           docInfo.slots_booked[slotDate] &&
           docInfo.slots_booked[slotDate].includes(formattedTime);
 
         if (!isBooked) {
-          timeSlots.push({
-            datetime: new Date(currentDate),
-            time: formattedTime,
-          });
+          timeSlots.push({ datetime: new Date(currentDate), time: formattedTime });
         }
 
         currentDate.setMinutes(currentDate.getMinutes() + 30);
@@ -77,39 +79,49 @@ function Appointment() {
     }
   };
 
-  // Handle payment navigation
+  // Navigate to PayPal payment page
   const goToPayment = () => {
+    // Check login
     if (!token) {
       toast.warn("Please login to book an appointment");
       return navigate("/login");
     }
 
+    if (!userData || !userData._id) {
+      toast.error("User information not found. Please login again.");
+      return navigate("/login");
+    }
+
+    // Check slot selection
     if (!slotTime) {
       toast.warn("Please select a time slot");
       return;
     }
 
-    // get selected date
-    const date = docSlots[slotIndex][0]?.datetime;
-    if (!date) {
+    if (!docSlots[slotIndex] || docSlots[slotIndex].length === 0) {
+      toast.warn("Please select a valid day");
+      return;
+    }
+
+    const selectedDay = docSlots[slotIndex][0]?.datetime;
+    if (!selectedDay) {
       toast.warn("Please select a valid slot");
       return;
     }
 
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
+    const day = selectedDay.getDate();
+    const month = selectedDay.getMonth() + 1;
+    const year = selectedDay.getFullYear();
     const slotDate = `${day}_${month}_${year}`;
 
-    navigate(`/payment/${docId}`, {
-      state: {
-        slotDate,
-        slotTime,
-        userId: user?._id, // ensure this is available in AppContext
-        amount: docInfo.fees,
-        backendUrl,
-      },
-    });
+    // ✅ Save booking info in global AppContext
+    setSlotDate(slotDate);
+    setSlotTime(slotTime);
+    setAmount(docInfo.fees);
+    setUserId(userData._id);
+
+    // Navigate to payment page
+    navigate(`/payment/${docId}`);
   };
 
   useEffect(() => {
@@ -138,7 +150,6 @@ function Appointment() {
               {docInfo.name}
               <img className="w-5" src={assets.verified_icon} alt="verified" />
             </p>
-
             <div className="flex items-center gap-2 text-sm mt-1 text-gray-600">
               <p>
                 {docInfo.degree} - {docInfo.speciality}
@@ -176,7 +187,10 @@ function Appointment() {
             {docSlots.map((daySlots, index) => (
               <div
                 key={index}
-                onClick={() => setSlotIndex(index)}
+                onClick={() => {
+                  setSlotIndex(index);
+                  setSlotTimeLocal("");
+                }}
                 className={`text-center py-6 min-w-16 rounded-full cursor-pointer ${
                   slotIndex === index
                     ? "bg-primary text-white"
@@ -194,7 +208,7 @@ function Appointment() {
             {docSlots[slotIndex]?.map((item, index) => (
               <p
                 key={index}
-                onClick={() => setSlotTime(item.time)}
+                onClick={() => setSlotTimeLocal(item.time)}
                 className={`text-sm font-light flex-shrink-0 px-6 py-2 rounded-full cursor-pointer ${
                   item.time === slotTime
                     ? "bg-primary text-white"
@@ -206,7 +220,6 @@ function Appointment() {
             ))}
           </div>
 
-          {/* Button */}
           <button
             onClick={goToPayment}
             className="bg-primary py-3 text-white text-sm font-light rounded-full my-6 px-14"
@@ -215,7 +228,6 @@ function Appointment() {
           </button>
         </div>
 
-        {/* Related Doctors */}
         <RelatedDoctors docId={docId} speciality={docInfo.speciality} />
       </div>
     )
