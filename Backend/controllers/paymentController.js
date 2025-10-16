@@ -15,7 +15,7 @@ export const createOrder = async (req, res) => {
   try {
     const { docId } = req.body;
    
-    console.log("Creating order for doctor ID:", docId);
+    
 
     // Get doctor fees from DB
     const doctor = await doctorModel.findById(docId);
@@ -79,7 +79,7 @@ export const captureOrder = async (req, res) => {
         slotDate,
         date: Date.now(),
       };
-      console.log(appointmentData);
+    
       const newAppointment = new appointmentModel(appointmentData);
       await newAppointment.save();
       await doctorModel.findByIdAndUpdate(docId, { slots_booked });
