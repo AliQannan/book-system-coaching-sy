@@ -15,18 +15,18 @@ import info_icon from './info_icon.svg'
 import upload_icon from './upload_icon.png'
 import stripe_logo from './stripe_logo.png'
 import razorpay_logo from './razorpay_logo.png'
-import Dermatologist from './Dermatologist.svg'
-import Gastroenterologist from './Gastroenterologist.svg'
-import General_physician from './General_physician.svg'
-import Gynecologist from './Gynecologist.svg'
-import Neurologist from './Neurologist.svg'
-import Pediatricians from './Pediatricians.svg'
+import interview from './interview.png'
+
+import skills from './skills.png'
+
 import aliMain from "./aliMain.jpg"
-import github from './github.png'
+
 import twitter from './twitter.png'
 import linkedin from './linkedin.png'
 import close from './close.png'
-
+import cv from './cv.png'
+import coaching from './coaching.png'
+import jobsearch from './job-search.png'
 export const assets = {
     appointment_img,
     header_img,
@@ -46,36 +46,38 @@ export const assets = {
     stripe_logo,
     razorpay_logo,
     aliMain,
-    github,
+  
     twitter ,
     linkedin,
-    close
+    close,
 }
+
 
 export const specialityData = [
     {
-        speciality: 'General physician',
-        image: General_physician
+        speciality: 'General CV & Resume Optimization',
+        image: linkedin
     },
     {
-        speciality: 'Gynecologist',
-        image: Gynecologist
+        speciality: 'LinkedIn Profile Management',
+        image: cv
     },
     {
-        speciality: 'Dermatologist',
-        image: Dermatologist
+        speciality: 'Personalized Career Coaching',
+        image: coaching
     },
     {
-        speciality: 'Pediatricians',
-        image: Pediatricians
+        speciality: 'PInterview Preparation',
+        image: interview
     },
     {
-        speciality: 'Neurologist',
-        image: Neurologist
+        speciality: 'Skill Development & Learning Plan',
+        image: skills
     },
     {
-        speciality: 'Gastroenterologist',
-        image: Gastroenterologist
+        speciality: 'Job Search & Application Strategy',
+        image: jobsearch
     },
+    
 ]
 

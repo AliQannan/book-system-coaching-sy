@@ -13,7 +13,7 @@ function AddDoctor() {
   const [experience, setExperience] = useState("1 Year");
   const [fees, setFees] = useState("");
   const [about, setAbout] = useState("");
-  const [speciality, setSpeciality] = useState("General physician");
+  const [speciality, setSpeciality] = useState("Career Development Consultant");
   const [degree, setDegree] = useState("");
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
@@ -183,12 +183,10 @@ function AddDoctor() {
                 value={speciality}
                 className="border rounded px-3 py-2"
               >
-                <option value="General physician">General physician</option>
-                <option value="Gynecologist">Gynecologist</option>
-                <option value="Dermatologist">Dermatologist</option>
-                <option value="Pediatricians">Pediatricians</option>
-                <option value="Neurologist">Neurologist</option>
-                <option value="Gastroenterologist">Gastroenterologist</option>
+                <option value="Career Development Consultant">Career Development Consultant</option>
+                <option value="Recruiter">Recruiter</option>
+                <option value="Career Success Specialist">Career Success Specialist</option>
+               
               </select>
             </div>
             <div className="flex-1 flex flex-col gap-1">

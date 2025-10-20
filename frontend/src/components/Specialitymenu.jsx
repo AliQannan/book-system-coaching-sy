@@ -4,29 +4,42 @@ import { Link } from "react-router-dom";
 
 function SpecialityMenu() {
   return (
-    <div
-      className="flex flex-col items-center gap-4 py-16 text-gray-800"
+    <section
+      className="py-20 bg-gray-50"
       id="speciality"
     >
-      <h1 className="text-3xl font-medium">Find by Speciality</h1>
-      <p className="sm:w-1/3 text-center text-sm">
-        Simply browse through our extensive list of trusted doctors, schedule
-        your hassle-free.
-      </p>
-      <div className="flex sm:justify-center gap-4 pt-5 w-full overflow-x-scroll">
+      {/* Section header */}
+      <div className="max-w-6xl mx-auto text-center px-4">
+        <h2 className="text-4xl font-extrabold text-gray-900 mb-4">
+          Explore Our Services
+        </h2>
+        <p className="text-gray-600 text-lg sm:text-xl max-w-3xl mx-auto">
+          Browse our range of professional career coaching services. Whether you want to build a standout CV, optimize your LinkedIn profile, or get personalized coaching, we have the right solutions to guide you toward your dream career.
+        </p>
+      </div>
+
+      {/* Cards */}
+      <div className="max-w-6xl mx-auto mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-4">
         {specialityData.map((item, index) => (
           <Link
-            onClick={() => scrollTo(0, 0)}
-            className="flex flex-col items-center text-xs cursor-pointer flex-shrink-0 hover:-translate-y-2 transition-all duration-500"
             key={index}
             to={`/doctors/${item.speciality}`}
+            onClick={() => scrollTo(0, 0)}
+            className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 flex flex-col items-center text-center cursor-pointer"
           >
-            <img className="w-16 sm:w-24 mb-2" src={item.image} alt={item.speciality} />
-            <p>{item.speciality}</p>
+            <img
+              className="w-20 h-20 sm:w-24 sm:h-24 mb-4"
+              src={item.image}
+              alt={item.speciality}
+            />
+            <h3 className="text-lg font-semibold text-gray-900">{item.speciality}</h3>
+            <p className="text-gray-500 text-sm mt-2">
+              {item.description || "Professional coaching to help you grow."}
+            </p>
           </Link>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
