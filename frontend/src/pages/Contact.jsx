@@ -1,44 +1,69 @@
 import React from "react";
 import { assets } from "../assets/assets";
+import { MapPinIcon, PhoneIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
 
-function Contacat() {
+function Contact() {
   return (
-    <div>
-      <div className="text-center text-2xl pt-10 text-gray-500">
-        <p>
-          CONTACT <span className="text-gray-700 font-medium ">US</span>
-        </p>
-      </div>
-      <div className="my-10 flex flex-col justify-center md:flex-row gap-10 mb-28 text-sm">
+    <section className="relative bg-gradient-to-r from-blue-50 via-cyan-50 to-white text-gray-800 py-16 px-6 sm:px-12 lg:px-20 overflow-hidden">
+
+      {/* Background image for mobile */}
+      <div className="absolute inset-0 md:hidden">
         <img
-          className="w-full md:max-w-[360px]"
           src={assets.contact_image}
-          alt=""
+          alt="Contact NextStep"
+          className="absolute inset-0 w-full h-full object-cover opacity-10"
         />
-        <div className="flex flex-col justify-center items-start gap-6">
-          <p className="font-semibold text-lg text-gray-600">Our OFFICE</p>
-          <p className="text-gray-500">
-            54709 Willms Station
-            <br />
-            Suite 350 , Washington , USA
-          </p>
-          <p className="text-gray-500">
-            Tel : (415) 555-0132 <br />
-            Email : greatstackdev@gmail.com
-          </p>
-          <p className="font-semibold text-lg text-gray-600">
-            Careeres at PRESCRIPTO
-          </p>
-          <p className="text-gray-500">
-            learn more about our teams and job openings.
-          </p>
-          <button className="border border-black px-8 py-4 text-sm hover:bg-black hover:text-white transition-all duration-500">
-            Explore Jobs
-          </button>
+      </div>
+
+    
+
+      <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-12">
+        {/* Desktop Image */}
+        <img
+          src={assets.contact_image}
+          alt="Contact NextStep"
+          className="hidden md:block w-full md:max-w-[400px] rounded-2xl shadow-lg"
+        />
+
+        {/* Text Info */}
+        <div className="flex flex-col justify-center items-start gap-8 max-w-md">
+          <div className="flex items-start gap-4">
+            <MapPinIcon className="w-6 h-6 text-blue-600 mt-1" />
+            <div>
+              <h3 className="font-semibold text-lg text-blue-800 mb-1">Our Office</h3>
+              <p className="text-gray-600 leading-relaxed">
+                NextStep Coaching & Development  
+                <br />
+                Gaza City, Palestine  
+                <br />
+                (Remote & Global Services)
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4">
+            <PhoneIcon className="w-6 h-6 text-blue-600 mt-1" />
+            <div>
+              <h3 className="font-semibold text-lg text-blue-800 mb-1">Phone</h3>
+              <p className="text-gray-600 leading-relaxed">+970 599 123 456</p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-4">
+            <EnvelopeIcon className="w-6 h-6 text-blue-600 mt-1" />
+            <div>
+              <h3 className="font-semibold text-lg text-blue-800 mb-1">Email</h3>
+              <p className="text-gray-600 leading-relaxed">
+                <a href="mailto:contact@nextstepcoaching.com" className="text-blue-600 hover:underline">
+                  contact@nextstepcoaching.com
+                </a>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
-export default Contacat;
+export default Contact;

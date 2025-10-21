@@ -11,7 +11,7 @@ function Footer() {
         <div>
           <div className="flex items-center gap-3 mb-5">
             <img
-              className="w-20 h-20 object-contain" // increased logo size
+              className="w-60 object-contain" // increased logo size
               src={assets.logo}
               alt="NextStep Logo"
             />
