@@ -51,7 +51,7 @@ function Coaches() {
       <div className="text-center mt-12">
         <button
           onClick={() => {
-            navigate("/doctors");
+            navigate("/coaches");
             scrollTo(0, 0);
           }}
           className="inline-block bg-teal-500 text-white px-8 py-3 rounded-full font-semibold shadow-md hover:bg-teal-600 hover:scale-105 transition-all duration-300"
