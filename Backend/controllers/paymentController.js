@@ -4,11 +4,13 @@ import userModel from "../models/userModel.js";
 import appointmentModel from "../models/appointmentModel.js";
 
 // PayPal environment
-const environment = new paypal.core.SandboxEnvironment(
-  process.env.PAYPAL_CLIENT_ID ,
-  process.env.PAYPAL_SECRET 
+// PayPal environment (LIVE)
+const environment = new paypal.core.LiveEnvironment(
+  process.env.PAYPAL_CLIENT_ID,
+  process.env.PAYPAL_SECRET
 );
 const client = new paypal.core.PayPalHttpClient(environment);
+
 
 // Step 1: Create PayPal order
 export const createOrder = async (req, res) => {
