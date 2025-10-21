@@ -18,8 +18,7 @@ connectCloudinary();
 // CORS Configuration — allow only localhost
 app.use(cors({
   origin: [
-    "http://localhost:5173", 
-    "http://localhost:5174"// your local frontend URL
+   "https://book-system-coaching-sy-wyuu.vercel.app"
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ["Content-Type", "Authorization", "atoken", "dtoken", "token"],
