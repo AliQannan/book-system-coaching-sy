@@ -7,7 +7,7 @@ function Coaches() {
   const { doctors } = useContext(AppContext); // you can rename "doctors" to "coaches" in context later
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section id="related-coaches" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto text-center px-4">
         <h2 className="text-4xl font-extrabold text-gray-900 mb-4">
           Top Career Coaches

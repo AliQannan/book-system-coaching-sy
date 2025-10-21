@@ -21,10 +21,8 @@ function SpecialityMenu() {
       {/* Cards */}
       <div className="max-w-6xl mx-auto mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-4">
         {specialityData.map((item, index) => (
-          <Link
-            key={index}
-            to={`/doctors/${item.speciality}`}
-            onClick={() => scrollTo(0, 0)}
+          <p
+           
             className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 flex flex-col items-center text-center cursor-pointer"
           >
             <img
@@ -36,7 +34,7 @@ function SpecialityMenu() {
             <p className="text-gray-500 text-sm mt-2">
               {item.description || "Professional coaching to help you grow."}
             </p>
-          </Link>
+          </p>
         ))}
       </div>
     </section>

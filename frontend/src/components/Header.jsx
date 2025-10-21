@@ -28,18 +28,18 @@ function Header() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-4">
-            <Link
-              to="#speciality"
+            <a
+              href="#speciality"
               className="flex items-center gap-2 bg-teal-500 text-white px-6 py-3 rounded-full text-sm font-semibold shadow-md hover:bg-teal-600 hover:scale-105 transition-all duration-300"
             >
               Explore Services
-            </Link>
-            <Link
-              to="/contact"
+            </a>
+            <a
+              href="#related-coaches"
               className="flex items-center gap-2 border border-gray-900 text-gray-900 px-6 py-3 rounded-full text-sm font-semibold hover:bg-gray-900 hover:text-white hover:scale-105 transition-all duration-300"
             >
               Get Started
-            </Link>
+            </a>
           </div>
         </div>
 
