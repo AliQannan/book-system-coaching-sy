@@ -7,6 +7,7 @@ import adminRouter from "./routes/adminRoute.js";
 import doctorRouter from "./routes/doctorRoute.js";
 import userRouter from "./routes/userRoutes.js";
 import paymentRouter from "./routes/paymentRouter.js";
+import router from "./routes/clerkWebhookRoute.js";
 
 // Initialize app and connect to database
 const app = express();
@@ -18,6 +19,7 @@ connectCloudinary();
 // CORS Configuration — allow only localhost
 app.use(cors({
   origin: [
+    "http://localhost:5173",
    "https://book-system-coaching-sy-wyuu.vercel.app"
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -33,6 +35,10 @@ app.use('/api/paypal', paymentRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/doctor", doctorRouter);
 app.use("/api/user", userRouter);
+app.use("/api/webhooks", router);
+
+
+// app routes
 
 // Health Check
 app.get("/", (req, res) => {
