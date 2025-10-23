@@ -9,7 +9,7 @@ import AppContextProvider from "./context/Context.jsx";
 // Clerk
 import { ClerkProvider } from "@clerk/clerk-react";
 
-const clerkFrontendApi = process.env.REACT_APP_CLERK_FRONTEND_API; // set this in .env
+const clerkFrontendApi = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY; // set this in .env
 
 createRoot(document.getElementById("root")).render(
   <ClerkProvider frontendApi={clerkFrontendApi}>
