@@ -7,10 +7,6 @@ import App from "./App.jsx";
 import "./index.css";
 
 
-if (!clerkPublishableKey) {
-  throw new Error("Missing Clerk Publishable Key! Please set VITE_CLERK_PUBLISHABLE_KEY in your .env file");
-}
-
 createRoot(document.getElementById("root")).render(
   <React.StrictMode>
 
