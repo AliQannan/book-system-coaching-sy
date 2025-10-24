@@ -7,7 +7,7 @@ import AppContextProvider from "./context/Context.jsx";
 import App from "./App.jsx";
 import "./index.css";
 
-const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || "pk_test_ZmFzdC1mcm9nLTYyLmNsZXJrLmFjY291bnRzLmRldiQ";
 
 if (!clerkPublishableKey) {
   throw new Error("Missing Clerk Publishable Key! Please set VITE_CLERK_PUBLISHABLE_KEY in your .env file");
