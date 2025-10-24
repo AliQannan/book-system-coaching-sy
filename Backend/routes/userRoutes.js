@@ -3,6 +3,7 @@ import express from "express";
 import authUser from "../middlewares/authUser.js";
 import { getProfile , updateProfile , list_Appointment , cancelAppointment } from "../controllers/getProfile.js";
 import upload from "../middlewares/multer.js";
+import { loginUser, registerUser } from "../controllers/userController.js";
 // import { registerUser, loginUser } from "../controllers/userController.js"; // deprecated
 
 const userRouter = express.Router();
