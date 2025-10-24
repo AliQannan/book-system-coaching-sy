@@ -11,14 +11,14 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const { token, setToken } = useContext(AppContext);
+  const { token, setToken , backendUrl } = useContext(AppContext);
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
       if (state === "Sign Up") {
       
         const { data } = await axios.post(
-          "https://doctora-appointments-api.vercel.app/api/user/register",
+          `${backendUrl}/api/user/register`,
           { name, password, email }
         );
         if (data.success) {
@@ -30,7 +30,7 @@ function Login() {
         }
       } else {
         const { data } = await axios.post(
-          "https://doctora-appointments-api.vercel.app/api/user/login",
+          `${backendUrl}/api/user/login`,
           { password, email }
         );
        
