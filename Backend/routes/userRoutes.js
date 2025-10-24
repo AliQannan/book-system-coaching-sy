@@ -8,8 +8,8 @@ import upload from "../middlewares/multer.js";
 const userRouter = express.Router();
 
 // If you still want to keep register/login for legacy reasons, re-enable these routes
-// userRouter.post('/register', registerUser)
-// userRouter.post('/login', loginUser)
+userRouter.post('/register', registerUser)
+userRouter.post('/login', loginUser)
 
 userRouter.get('/profile', authUser, getProfile);
 userRouter.post('/update-profile', upload.single('image'), authUser, updateProfile);
